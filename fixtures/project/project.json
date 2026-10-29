@@ -1,0 +1,45 @@
+{
+  "name": "toyhttpd",
+  "source_dir": "src",
+  "known_cves": [],
+  "support_dirs": [
+    "www"
+  ],
+  "targets": [
+    {
+      "name": "hdrparse",
+      "bin": "bin/hdrparse",
+      "symbols": [
+        "parse_header"
+      ]
+    },
+    {
+      "name": "staticsrv",
+      "bin": "bin/staticsrv",
+      "symbols": [
+        "serve_path"
+      ]
+    },
+    {
+      "name": "rangeparse",
+      "bin": "bin/rangeparse",
+      "symbols": [
+        "parse_range"
+      ]
+    },
+    {
+      "name": "cookieparse",
+      "bin": "bin/cookieparse",
+      "symbols": [
+        "parse_cookie"
+      ]
+    },
+    {
+      "name": "chunkdec",
+      "bin": "bin/chunkdec",
+      "symbols": [
+        "decode_chunk"
+      ]
+    }
+  ]
+}

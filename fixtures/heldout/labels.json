@@ -1,0 +1,12 @@
+{
+  "project": "../project/project.json",
+  "known": "../corpus/known/index.json",
+  "items": [
+    { "id": "h1", "label": "valid", "control": "negative", "report": "reports/h1-valid-terse-typo.md" },
+    { "id": "h2", "label": "valid", "control": "negative", "report": "reports/h2-valid-polished-typo-path.md" },
+    { "id": "h3", "label": "slop", "report": "reports/h3-slop-plausible.md" },
+    { "id": "h4", "label": "slop", "report": "reports/h4-slop-benign-poc.md", "poc": "pocs/h4-benign.bin" },
+    { "id": "h5", "label": "slop", "report": "reports/h5-slop-realistic-cve.md" },
+    { "id": "h6", "label": "valid", "control": "negative", "report": "reports/h6-valid-poc-typo.md", "poc": "pocs/h6-cookie.txt" }
+  ]
+}

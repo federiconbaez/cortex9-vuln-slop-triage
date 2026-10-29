@@ -1,0 +1,6 @@
+[
+  { "id": "k1", "report": "k1-hdrparse-overflow.md",
+    "fingerprint": { "target": "hdrparse", "oracle": "crash" }, "symbols": ["parse_header"] },
+  { "id": "k2", "report": "k2-staticsrv-traversal.md",
+    "fingerprint": { "target": "staticsrv", "oracle": "canary_leak" }, "symbols": ["serve_path"] }
+]

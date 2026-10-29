@@ -1,0 +1,26 @@
+{
+  "project": "../project/project.json",
+  "known": "known/index.json",
+  "items": [
+    { "id": "v1", "label": "valid", "control": "negative", "report": "reports/v1-ibb-range-dos.md", "poc": "pocs/v1-range.txt" },
+    { "id": "v2", "label": "valid", "control": "negative", "report": "reports/v2-ghsa-cookie-overflow.md", "poc": "pocs/v2-cookie.txt" },
+    { "id": "v3", "label": "valid", "control": "negative", "report": "reports/v3-polished-chunk-overflow.md", "poc": "pocs/v3-chunk.bin" },
+    { "id": "v4", "label": "valid", "control": "negative", "report": "reports/v4-terse-chunk.md" },
+    { "id": "v5", "label": "valid", "control": "negative", "report": "reports/v5-es-range-sin-poc.md" },
+    { "id": "s01", "label": "slop", "control": "positive", "report": "reports/s01-future-cve.md" },
+    { "id": "s02", "label": "slop", "control": "positive", "report": "reports/s02-template-cve.md" },
+    { "id": "s03", "label": "slop", "control": "positive", "report": "reports/s03-empty-poc.md", "poc": "pocs/s3-empty.bin" },
+    { "id": "s04", "label": "slop", "report": "reports/s04-placeholder-poc.md" },
+    { "id": "s05", "label": "slop", "report": "reports/s05-hallucinated-http2.md" },
+    { "id": "s06", "label": "slop", "report": "reports/s06-sqli-in-c.md" },
+    { "id": "s07", "label": "slop", "report": "reports/s07-fake-asan.md", "poc": "pocs/s7-benign-range.txt" },
+    { "id": "s08", "label": "slop", "report": "reports/s08-line-out-of-range.md", "poc": "pocs/s8-benign-hdr.bin" },
+    { "id": "s09", "label": "slop", "report": "reports/s09-dependency-dump.md" },
+    { "id": "s10", "label": "slop", "control": "positive", "report": "reports/s10-es-plantilla.md" },
+    { "id": "d1", "label": "dup", "dup_of": "k1", "report": "reports/d1-hdr-crash-poc.md", "poc": "pocs/d1-hdr.bin" },
+    { "id": "d2", "label": "dup", "dup_of": "k1", "report": "reports/d2-hdr-rephrase.md" },
+    { "id": "d3", "label": "dup", "dup_of": "k2", "report": "reports/d3-traversal-poc.md", "poc": "pocs/d3-traversal.txt" },
+    { "id": "d4", "label": "dup", "dup_of": "k2", "report": "reports/d4-traversal-rephrase.md" },
+    { "id": "d5", "label": "dup", "dup_of": "k1", "report": "reports/d5-hdr-near-copy.md", "poc": "pocs/d5-hdr.bin" }
+  ]
+}
