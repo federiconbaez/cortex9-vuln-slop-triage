@@ -1,0 +1,26 @@
+[package]
+name = "vuln-slop-triage"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.85"
+license = "Apache-2.0"
+description = "Triage de reportes de vulnerabilidades: separa slop de reportes reales reproduciendo el PoC con un oráculo independiente del texto"
+repository = "https://github.com/federiconbaez/cortex9-vuln-slop-triage"
+keywords = ["security", "triage", "bug-bounty", "vulnerability", "poc"]
+categories = ["command-line-utilities"]
+authors = ["Federico Nicolas Báez Rizzo"]
+default-run = "vuln-slop-triage"
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+regex = "1"
+
+[[bin]]
+name = "vuln-slop-triage"
+path = "src/main.rs"
+
+[lib]
+name = "vuln_slop_triage"
+path = "src/lib.rs"
