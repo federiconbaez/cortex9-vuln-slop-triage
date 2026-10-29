@@ -61,7 +61,7 @@ independent of the report text. Text signals come second.*
 | modo | aislamiento | dónde se probó |
 |---|---|---|
 | `--sandbox local --net isolate` (default) | tmpdir propio, entorno vacío, timeout, `unshare -rn` (solo `lo`) | en esta box y en el job `unit` de CI |
-| `--sandbox docker` | `docker run --network=none --cap-drop=ALL --pids-limit 64 --memory 256m` + `timeout` | **solo en el job `docker` de CI**: en la box de desarrollo no hay Docker |
+| `--sandbox docker` | `docker run --network=none --cap-drop=ALL --pids-limit 64 --memory 256m` + `timeout` | en el job `docker` de CI (Docker 28.0.4); en la box de desarrollo no hay Docker |
 | `--net host` | sin aislar la red; queda registrado en el veredicto | solo para depurar |
 
 Si el sandbox pedido no existe, la herramienta **falla con exit 2**: no hace
@@ -133,8 +133,18 @@ los cierres salen de señales de texto. Pero bajan dos cosas:
 
 La sandbox aporta `PRIORITIZE` y la huella de duplicados. No aporta los cierres.
 
+**Docker en CI** (job `docker`, runner ubuntu-24.04, Docker 28.0.4, run
+[40815237342](https://github.com/federiconbaez/cortex9-vuln-slop-triage/actions/runs/40815237342)):
+
+```text
+n=20 autoclose_precision=1.0000 (10/10) slop_recall=1.0000 valid_closed=0/5
+valid_poc_repro=3/3 dup_detected=5/5 controls+=4/4 controls-=5/5
+mean_ms=293.8 max_ms=3974 sandbox="docker 28.0.4 --network=none" pass=true
+```
+
+El arranque de cada contenedor sube el tiempo medio a ~294 ms por reporte.
+
 **No medido todavía:**
-- el job `docker` (corre solo en CI);
 - un corpus real de 200 reportes;
 - la tasa de reproducción sobre PoCs reales que necesitan compilar o tener red.
 
