@@ -1,0 +1,54 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  unit:
+    name: fmt + clippy + test + medición (sandbox local)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: stable
+          components: clippy, rustfmt
+      - name: kernel
+        run: uname -a
+      - name: habilitar user namespaces sin privilegios (unshare -rn)
+        run: |
+          if [ -e /proc/sys/kernel/apparmor_restrict_unprivileged_userns ]; then
+            sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+          fi
+          # Falla fuerte si el sandbox local no está disponible: sin skips silenciosos.
+          unshare -rn true
+      - name: fmt
+        run: cargo fmt --all -- --check
+      - name: clippy
+        run: cargo clippy --all-targets -- -D warnings
+      - name: compilar objetivos de prueba
+        run: scripts/build-targets.sh
+      - name: test
+        run: cargo test --workspace
+      - name: reproducir medición (corpus de desarrollo, con umbrales)
+        run: scripts/measure.sh
+      - name: reproducir medición (held-out, informativa, pass=false esperado)
+        run: LABELS=fixtures/heldout/labels.json scripts/measure.sh --no-gate
+
+  docker:
+    name: medición con docker --network=none
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: stable
+      - name: docker requerido
+        run: |
+          command -v docker || { echo "::error::docker es requerido para este job"; exit 1; }
+          docker version
+          docker pull ubuntu:24.04
+      - name: reproducir medición en docker
+        run: SANDBOX=docker scripts/measure.sh
